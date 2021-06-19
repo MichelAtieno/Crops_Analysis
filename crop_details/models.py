@@ -20,7 +20,7 @@ class Crops(models.Model):
     unit = models.CharField(max_length=20, choices=UNITS)
     volume_in_kgs = models.PositiveIntegerField()
     values_in_ksh = models.FloatField(null=True, blank=True, default=0.0)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.commodity_type}-{self.product_variety}"

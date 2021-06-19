@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import CsvModelForm
 from .models import Csv
 import csv 
+from datetime import datetime
 from crop_details.models import Crops
 
 # Create your views here.
@@ -28,7 +29,7 @@ def upload_file_view(request):
                     unit = row[2]
                     volume_in_kgs = row[3]
                     values_in_ksh = row[4]
-                    date = row[5]
+                    date = datetime.strptime(row[5], '%m/%d/%Y %H:%M')
                     Crops.objects.create(
                         product_variety = product_variety,
                         commodity_type = commodity_type,
