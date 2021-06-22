@@ -6,11 +6,53 @@
 {% endblock title %}
 
 {% block content %}
-
+{% comment %} backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16) {% endcomment %}
 <form action="" method="post" class="ui form" enctype="multipart/form-data">
      {% csrf_token %}
      {{ form }}
      <button type="submit" class="ui button primary">Confirm</button>
 </form>
 
+<div>
+ <canvas id="myChart" width="300", height="3000"></canvas>
+</div>
+
+  {% comment %} <div>
+  {% for crop in crops %}
+    {{crop.commodity_type.Cabbages}}
+    {{crop.values_in_ksh}}
+  {% endfor %}
+  </div> {% endcomment %}
+
+
 {% endblock content %}
+
+{% block scripts %}
+    <script>
+    $(document).ready(function(){
+        let myChart = document.getElementById('myChart').getContext('2d');
+        let massPopChart = new Chart(myChart, {
+            type: 'horizontalBar',// bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            data: {
+            labels:[{% for crop in crops %}'{{crop.commodity_type}}', {% endfor %}],
+            datasets:[{
+                label:'Values_in_KSH',
+                data:[{% for crop in crops %}'{{crop.values_in_ksh}}', {% endfor %}],
+                backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16) 
+            }]
+            },
+            options:{
+                title: {
+                    display: true,
+                    text: 'Crops Analysis'
+                }
+            }
+        });
+
+
+
+    });
+
+    </script>
+
+{% endblock scripts %}
