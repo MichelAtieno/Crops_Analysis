@@ -12,17 +12,22 @@
      {{ form }}
      <button type="submit" class="ui button primary">Confirm</button>
 </form>
+ {% comment %} <div>
+  {% for crop in crops %}
+  {% if crop.product_variety is "Horticulture" %}
+    <p>{{crop.product_variety}}</p>
+    <p>{{crop.commodity_type}}</p>
+    {% else %}
+    <p>Not Horticulture</p>
+    {% endif %}
+  {% endfor %}
+  </div> {% endcomment %}
 
 <div>
  <canvas id="myChart" width="300", height="3000"></canvas>
 </div>
 
-  {% comment %} <div>
-  {% for crop in crops %}
-    {{crop.commodity_type.Cabbages}}
-    {{crop.values_in_ksh}}
-  {% endfor %}
-  </div> {% endcomment %}
+
 
 
 {% endblock content %}
