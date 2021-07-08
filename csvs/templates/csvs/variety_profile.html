@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+ <div class="container">
+        <div class="row" id="news_title">
+            <div class="col-md-12">
+                <h1 >{{ one_variety.variety }}</h1>
+            </div>
+        </div> 
+        <div id="content" class="main_content">  
+        <div class="info">
+        <div class="row">
+            <div class="col-md-11">
+                
+                <div class="row">
+                   
+                        {% for var in queryset %}
+                        <div class="col-md-4">
+                            
+                            <div class="card mt-2">
+                               
+                                
+                                <h5 class="card-body">
+                                    <span> {{ var.id }}</span>
+                                    <span>Commodity: {{ var.commodity }}</span>
+                                    <br>
+                                    <span>Unit: {{ var.unit }}</span>
+                                    <br>
+                                    <span>Volume_in_Kgs: {{ var.volume_in_kgs }}</span>
+                                    <br>
+                                    <span>Values_in_Kshs: {{ var.values_in_ksh }}</span>
+                                    <br>
+                                    <span>Date: {{ var.date }}</span>
+                                </h5>
+                            
+                                
+                                
+                            </div>
+                            
+                        </div>
+                        {% endfor %}
+
+                    
+                </div>
+
+            </div>
+            <div class="col-md-1"></div>
+           
+        </div>
+    </div>
+    </div>
+    </div>
+
+    {% endblock content %}

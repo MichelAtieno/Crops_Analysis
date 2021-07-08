@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from .forms import CsvModelForm
 from .models import Csv
@@ -13,7 +14,7 @@ def get_variety():
 
 
 def upload_file_view(request):
-    latest = Commodity_Type.objects.order_by('-date')[0:4]
+    latest = Commodity_Type.objects.order_by('date')[0:6]
     variety = get_variety()
     all_varieties = Product_Variety.objects.all()
     crops = Commodity_Type.objects.all()
@@ -82,3 +83,15 @@ def upload_file_view(request):
         }
             
     return render(request, 'csvs/upload.html',context)
+
+def variety_profile(request, id):
+    one_variety = get_object_or_404(Product_Variety, id=id)
+    var_queryset = Commodity_Type.objects.all()
+    var_query = one_variety.variety
+    var_queryset = var_queryset.filter(Q(product_variety__variety__icontains=var_query)).distinct()
+    context = {
+        'one_variety': one_variety,
+        'queryset': var_queryset,
+    }
+
+    return render(request, "csvs/variety_profile.html", context)

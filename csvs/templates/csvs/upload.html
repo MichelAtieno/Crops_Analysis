@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Main Page
@@ -9,47 +10,63 @@
 {% comment %} backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16) {% endcomment %}
 <form action="" method="post" class="ui form" enctype="multipart/form-data">
      {% csrf_token %}
-     {{ form }}
+     {{ form|crispy }}
+     
      <button type="submit" class="ui button primary">Confirm</button>
 </form>
- {% comment %} <div>
-  {% for crop in crops %}
-  {% if crop.product_variety is "Horticulture" %}
-    <p>{{crop.product_variety}}</p>
-    <p>{{crop.commodity_type}}</p>
-    {% else %}
-    <p>Not Horticulture</p>
-    {% endif %}
-  {% endfor %}
-  </div> {% endcomment %}
-
-{% comment %} <div>
- <canvas id="myChart" width="300", height="3000"></canvas>
-</div> {% endcomment %}
-    <div class="row justify-content-center mb-4">
-        {% for item in latest %}
-        <div class="col-md-3 col-sm-6 col-xs-6" id="">
-          <a href="" class="card inner">
-            {% comment %} <img src="" class="card-img-top" alt="{{ item.title }}"> {% endcomment %}
-            <h3>{{ item.commodity }}</h3>
-            {% for var in item.product_variety.all %}
-                <h3>{{ var.variety }}</h3>
-            {% endfor %}
-            <h3>{{ item.unit }}</h3>
-            <h3>{{ item.volume_in_kgs }}</h3>
-            <h3>{{ item.values_in_ksh }}</h3>
-            <h3>{{ item.date }}</h3>
-          </a>
+ 
+<div class="container">
+        <div class="row my-4">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+                <table class="table bg-white">
+                    <thead class="bg-info">
+                        <tr class="text-white">
+                            <th scope="col">Commodity Type </th>
+                            <th scope="col">Product Variety</th>
+                            <th scope="col">Unit</th>
+                            <th scope="col">Volume in Kgs</th>
+                            <th scope="col">Values in Ksh</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in latest %}
+                        <tr>
+                            <td>{{ item.commodity }}</td>
+                            {% for var in item.product_variety.all %}
+                            <td>{{ var.variety }}</td>
+                            {% endfor %}
+                            <td>{{ item.unit }}</td>
+                            
+                            <td>{{ item.volume_in_kgs }}</td>
+                            <td>{{ item.values_in_ksh }}</td>
+                            <td>{{ item.date }}</td>
+                            
+                        </tr>
+                        {% endfor %}
+                       
+                        
+                    </tbody>
+                </table> 
+            </div>
+            <div class="col-md-1">
+            </div>
         </div>
-        {% endfor %}
+
+           
     </div>
 
+
+
+    
  <div class="row justify-content-center mb-4">
         {% for var in all_varieties %}
             <div class="col-md-3 col-sm-6 col-xs-12 col-xs-6">
         <div class="imageBox card" id="Categories">
         <img src="" class="img-fluid card-img-top" alt="{{ var.variety }}">
-        <a  href="" class="card-body"><h3>{{ var }}</h3> </a>
+        <a  href="{{ var.get_variety_absolute_url }}" class="card-body"><h3>{{ var }}</h3> </a>
         </div>     
         </div>
         {% endfor %}

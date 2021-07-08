@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'csvs',
-    'crop_details'
+    'crop_details',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [

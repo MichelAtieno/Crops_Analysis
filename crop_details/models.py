@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 
 # Create your models here.product_variety = models.ManyToManyField(Product_Variety)
 
@@ -9,6 +10,11 @@ class Product_Variety(models.Model):
 
     def __str__(self):
         return self.variety
+
+    def get_variety_absolute_url(self):
+        return reverse('csvs:variety_profile', kwargs={
+            'id': self.id
+        })
 
 
 UNITS = (
