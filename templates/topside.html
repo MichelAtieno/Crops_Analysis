@@ -1,0 +1,66 @@
+{% load crispy_forms_tags %}
+
+
+
+<div class="container">
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                       Upload CSV File here
+                    </div>
+                    <div class="card-body">
+                        <div class="border bg-white p-3">
+                            <h4>Add csv</h4>
+                            <hr>
+                            <form method="POST", enctype="multipart/form-data" >
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <input class="btn btn-success btn-block" type="submit" value="Add CSV">
+                            </form>
+                    </div>
+
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        Product Variety
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            {% for var in all_varieties %}
+                            <div class="col-md-4 p-2">
+                                <a class="text-decoration-none text-dark" href="">
+                                    <div class="card my-card shadow text-center p-3">
+                                        <h4><i class="fas fa-users"></i></h4>
+                                        
+                                        <a  href="{{ var.get_variety_absolute_url }}" class="card-body"><h3>{{ var }}</h3> </a>
+                                    </div>
+                                </a>
+                            </div>
+                            {% comment %} <div class="col-md-4 p-3">
+                                <a class="text-decoration-none text-dark" href="{% url 'product' %}">
+                                    <div class="card my-card shadow text-center p-3">
+                                        <h4>Products <i class="fas fa-box"></i></h4>
+                                        <h3>{{ product_count }}</h3>
+                                    </div>
+                                </a>
+                            </div> {% endcomment %}
+                            {% comment %} <div class="col-md-4 p-3">
+                                <a class="text-decoration-none text-dark"  href="{% url 'order' %}">
+                                    <div class="card my-card shadow text-center p-3">
+                                        <h4>Orders <i class="fas fa-shipping-fast"></i></h4>
+                                        <h3>{{ orders_count }}</h3>
+                                    </div>
+                                </a>
+                            </div> {% endcomment %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
