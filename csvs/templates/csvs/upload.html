@@ -23,10 +23,40 @@
   {% endfor %}
   </div> {% endcomment %}
 
-<div>
+{% comment %} <div>
  <canvas id="myChart" width="300", height="3000"></canvas>
-</div>
+</div> {% endcomment %}
+    <div class="row justify-content-center mb-4">
+        {% for item in latest %}
+        <div class="col-md-3 col-sm-6 col-xs-6" id="">
+          <a href="" class="card inner">
+            {% comment %} <img src="" class="card-img-top" alt="{{ item.title }}"> {% endcomment %}
+            <h3>{{ item.commodity }}</h3>
+            {% for var in item.product_variety.all %}
+                <h3>{{ var.variety }}</h3>
+            {% endfor %}
+            <h3>{{ item.unit }}</h3>
+            <h3>{{ item.volume_in_kgs }}</h3>
+            <h3>{{ item.values_in_ksh }}</h3>
+            <h3>{{ item.date }}</h3>
+          </a>
+        </div>
+        {% endfor %}
+    </div>
 
+ <div class="row justify-content-center mb-4">
+        {% for var in all_varieties %}
+            <div class="col-md-3 col-sm-6 col-xs-12 col-xs-6">
+        <div class="imageBox card" id="Categories">
+        <img src="" class="img-fluid card-img-top" alt="{{ var.variety }}">
+        <a  href="" class="card-body"><h3>{{ var }}</h3> </a>
+        </div>     
+        </div>
+        {% endfor %}
+            
+       
+       
+</div>
 
 
 
