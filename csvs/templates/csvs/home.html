@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+    Main Page
+
+{% endblock title %}
+
+{% block content %}
+<head>
+  
+</head>
+<body>
+
+{% include "topside.html" %}
+
+{% comment %} backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16) {% endcomment %}
+
+ 
+<div class="container">
+        <div class="row my-4">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+                <div class="scrollable">
+                    <table class="table bg-white">
+                        <thead class="bg-info">
+                            <tr class="text-white">
+                                <th scope="col">Commodity Type </th>
+                                <th scope="col">Product Variety</th>
+                                <th scope="col">Unit</th>
+                                <th scope="col">Volume in Kgs</th>
+                                <th scope="col">Values in Ksh</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in latest %}
+                            <tr>
+                                <td>{{ item.commodity }}</td>
+                                {% for var in item.product_variety.all %}
+                                <td>{{ var.variety }}</td>
+                                {% endfor %}
+                                <td>{{ item.unit }}</td>
+                                
+                                <td>{{ item.volume_in_kgs }}</td>
+                                <td>{{ item.values_in_ksh }}</td>
+                                <td>{{ item.date }}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>
+
+           
+    </div>
+
+
+
+    
+ {% comment %} <div class="row justify-content-center mb-4">
+        {% for var in all_varieties %}
+        <div class="col-md-3 col-sm-6 col-xs-12 col-xs-6">
+        <div class="imageBox card" id="Categories">
+        <img src="" class="img-fluid card-img-top" alt="{{ var.variety }}">
+        <a  href="{{ var.get_variety_absolute_url }}" class="card-body"><h3>{{ var }}</h3> </a>
+        </div>     
+        </div>
+        {% endfor %}
+            
+       
+       
+</div> {% endcomment %}
+
+
+</body>
+{% endblock content %}
+

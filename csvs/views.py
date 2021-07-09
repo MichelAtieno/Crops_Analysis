@@ -8,16 +8,29 @@ from crop_details.models import Commodity_Type, Product_Variety
 
 # Create your views here.
 
+def index(request):
+    latest = Commodity_Type.objects.order_by('-date')
+    variety = get_variety()
+    all_varieties = Product_Variety.objects.all()
+    crops = Commodity_Type.objects.all()
+
+    context =  {
+        'crops': crops,
+        'latest': latest,
+        'variety': variety,
+        'all_varieties': all_varieties,
+        }
+
+    return render(request, 'csvs/home.html',context)
+
+
 def get_variety():
     queryset = Commodity_Type.objects.values('product_variety__variety')
     return queryset
 
 
 def upload_file_view(request):
-    latest = Commodity_Type.objects.order_by('date')[0:6]
-    variety = get_variety()
-    all_varieties = Product_Variety.objects.all()
-    crops = Commodity_Type.objects.all()
+    
 
     form = CsvModelForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -76,10 +89,7 @@ def upload_file_view(request):
 
     context =  {
         'form': form,
-        'crops': crops,
-        'latest': latest,
-        'variety': variety,
-        'all_varieties': all_varieties,
+       
         }
             
     return render(request, 'csvs/upload.html',context)

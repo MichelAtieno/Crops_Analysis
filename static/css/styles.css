@@ -2,3 +2,8 @@
     padding: 10rem !important;
 }
 
+.scrollable {
+    height: 300px;
+    overflow: scroll;
+}
+

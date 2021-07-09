@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %}
     Main Page
@@ -7,49 +8,49 @@
 {% endblock title %}
 
 {% block content %}
+<head>
+    <style>
+      .scrollable {
+          height: 400px;
+          overflow: scroll;
+      }
 
-{% include "topside.html" %}
+        
+    </style>
+
+</head>
+<body>
+
+
 
 {% comment %} backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16) {% endcomment %}
 
  
 <div class="container">
         <div class="row my-4">
-            <div class="col-md-1">
+            <div class="col-md-3">
             </div>
-            <div class="col-md-10">
-                <table class="table bg-white">
-                    <thead class="bg-info">
-                        <tr class="text-white">
-                            <th scope="col">Commodity Type </th>
-                            <th scope="col">Product Variety</th>
-                            <th scope="col">Unit</th>
-                            <th scope="col">Volume in Kgs</th>
-                            <th scope="col">Values in Ksh</th>
-                            <th scope="col">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in latest %}
-                        <tr>
-                            <td>{{ item.commodity }}</td>
-                            {% for var in item.product_variety.all %}
-                            <td>{{ var.variety }}</td>
-                            {% endfor %}
-                            <td>{{ item.unit }}</td>
-                            
-                            <td>{{ item.volume_in_kgs }}</td>
-                            <td>{{ item.values_in_ksh }}</td>
-                            <td>{{ item.date }}</td>
-                            
-                        </tr>
-                        {% endfor %}
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                       Upload CSV File here
+                    </div>
+                    <div class="card-body">
+                        <div class="border bg-white p-3">
+                            <h4>Add csv</h4>
+                            <hr>
+                            <form method="POST", enctype="multipart/form-data" >
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <input class="btn btn-success btn-block" type="submit" value="Add CSV">
+                            </form>
+                    </div>
+
                        
-                        
-                    </tbody>
-                </table> 
+                    </div>
+                </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-3">
             </div>
         </div>
 
@@ -74,35 +75,6 @@
 </div> {% endcomment %}
 
 
-
+</body>
 {% endblock content %}
 
-{% block scripts %}
-    <script>
-    $(document).ready(function(){
-        let myChart = document.getElementById('myChart').getContext('2d');
-        let massPopChart = new Chart(myChart, {
-            type: 'horizontalBar',// bar, horizontalBar, pie, line, doughnut, radar, polarArea
-            data: {
-            labels:[{% for crop in crops %}'{{crop.commodity_type}}', {% endfor %}],
-            datasets:[{
-                label:'Values_in_KSH',
-                data:[{% for crop in crops %}'{{crop.values_in_ksh}}', {% endfor %}],
-                backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16) 
-            }]
-            },
-            options:{
-                title: {
-                    display: true,
-                    text: 'Crops Analysis'
-                }
-            }
-        });
-
-
-
-    });
-
-    </script>
-
-{% endblock scripts %}

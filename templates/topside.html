@@ -4,27 +4,8 @@
 
 <div class="container">
         <div class="row mt-4">
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-header bg-info text-white">
-                       Upload CSV File here
-                    </div>
-                    <div class="card-body">
-                        <div class="border bg-white p-3">
-                            <h4>Add csv</h4>
-                            <hr>
-                            <form method="POST", enctype="multipart/form-data" >
-                                {% csrf_token %}
-                                {{ form|crispy }}
-                                <input class="btn btn-success btn-block" type="submit" value="Add CSV">
-                            </form>
-                    </div>
-
-                       
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9">
+            
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-info text-white">
                         Product Variety
@@ -32,7 +13,7 @@
                     <div class="card-body">
                         <div class="row">
                             {% for var in all_varieties %}
-                            <div class="col-md-4 p-2">
+                            <div class="col-md-3 p-2">
                                 <a class="text-decoration-none text-dark" href="">
                                     <div class="card my-card shadow text-center p-3">
                                         <h4><i class="fas fa-users"></i></h4>

@@ -9,35 +9,37 @@
             <div class="col-md-1">
             </div>
             <div class="col-md-10">
-                <table class="table bg-white">
-                    <thead class="bg-info">
-                        <tr class="text-white">
-                            <th scope="col">ID</th>
-                            <th scope="col">Commodity Type</th>
-                            <th scope="col">Unit</th>
-                            <th scope="col">Volume in Kgs</th>
-                            <th scope="col">Values in Ksh</th>
-                            <th scope="col">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for var in queryset %}
-                        <tr>
-                            <td>{{ var.id }}</td>
-                            <td>{{ var.commodity }}</td>
-                            
-                            <td>{{ var.unit }}</td>
-                            
-                            <td>{{ var.volume_in_kgs }}</td>
-                            <td>{{ var.values_in_ksh }}</td>
-                            <td>{{ var.date }}</td>
-                            
-                        </tr>
-                        {% endfor %}
-                       
+                <div class="scrollable">
+                    <table class="table bg-white">
+                        <thead class="bg-info">
+                            <tr class="text-white">
+                                <th scope="col">ID</th>
+                                <th scope="col">Commodity Type</th>
+                                <th scope="col">Unit</th>
+                                <th scope="col">Volume in Kgs</th>
+                                <th scope="col">Values in Ksh</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for var in queryset %}
+                            <tr>
+                                <td>{{ var.id }}</td>
+                                <td>{{ var.commodity }}</td>
+                                
+                                <td>{{ var.unit }}</td>
+                                
+                                <td>{{ var.volume_in_kgs }}</td>
+                                <td>{{ var.values_in_ksh }}</td>
+                                <td>{{ var.date }}</td>
+                                
+                            </tr>
+                            {% endfor %}
                         
-                    </tbody>
-                </table> 
+                            
+                        </tbody>
+                    </table> 
+                </div>
             </div>
             <div class="col-md-1">
             </div>
