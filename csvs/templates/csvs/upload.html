@@ -8,24 +8,9 @@
 {% endblock title %}
 
 {% block content %}
-<head>
-    <style>
-      .scrollable {
-          height: 400px;
-          overflow: scroll;
-      }
 
-        
-    </style>
-
-</head>
 <body>
 
-
-
-{% comment %} backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16) {% endcomment %}
-
- 
 <div class="container">
         <div class="row my-4">
             <div class="col-md-3">
@@ -58,23 +43,7 @@
     </div>
 
 
-
-    
- {% comment %} <div class="row justify-content-center mb-4">
-        {% for var in all_varieties %}
-        <div class="col-md-3 col-sm-6 col-xs-12 col-xs-6">
-        <div class="imageBox card" id="Categories">
-        <img src="" class="img-fluid card-img-top" alt="{{ var.variety }}">
-        <a  href="{{ var.get_variety_absolute_url }}" class="card-body"><h3>{{ var }}</h3> </a>
-        </div>     
-        </div>
-        {% endfor %}
-            
-       
-       
-</div> {% endcomment %}
-
-
 </body>
 {% endblock content %}
 
+{% comment %} backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16) {% endcomment %}
