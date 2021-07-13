@@ -3,12 +3,16 @@
 {% block content %}
 <div class="container">
         <div>
-            <h5{{ object.commodity }}</h5>
+            
         </div>
         <div>
-           
+            <h5>{{ object.commodity }}</h5>
+            {% for var in  object.product_variety.all %}
             <h5>{{ var }}</h5>
-         
+            {% endfor %}
+            <h5>{{ object.values_in_ksh }}</h5>
+            <h5>{{ object.volume_in_kgs }}</h5>
+            
         </div>
         <div class="row my-4">
             <div class="col-md-1">
