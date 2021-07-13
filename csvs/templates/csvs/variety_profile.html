@@ -24,7 +24,7 @@
                         <tbody>
                             {% for var in queryset %}
                             <tr>
-                                <td>{{ var.id }}</td>
+                                <td>{{ var.slug }}</td>
                                 <td>{{ var.commodity }}</td>
                                 
                                 <td>{{ var.unit }}</td>
@@ -61,7 +61,7 @@
                     data: {
                         labels: [{% for var in queryset %} '{{ var.commodity }}', {% endfor %}],
                         datasets: [{
-                            label: 'Products',
+                            label: 'Crops',
                             data: [{% for var in queryset %} {{ var.values_in_ksh }}, {% endfor %}],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 1)',
