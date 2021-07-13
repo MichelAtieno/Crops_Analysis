@@ -27,6 +27,7 @@
                     <table class="table bg-white">
                         <thead class="bg-info">
                             <tr class="text-white">
+                                <th scope="col">ID </th>
                                 <th scope="col">Commodity Type </th>
                                 <th scope="col">Product Variety</th>
                                 <th scope="col">Unit</th>
@@ -38,7 +39,8 @@
                         <tbody>
                             {% for item in latest %}
                             <tr>
-                                <td>{{ item.commodity }}</td>
+                                <td>{{ item.slug }}</td>
+                                <td><a href="{{ item.get_absolute_url }}">{{ item.commodity }}</a></td>
                                 {% for var in item.product_variety.all %}
                                 <td>{{ var.variety }}</td>
                                 {% endfor %}
@@ -62,10 +64,6 @@
 
            
     </div>
-
-
-
-
 
 
 

@@ -1,18 +1,19 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import DetailView
 from .forms import CsvModelForm
 from .models import Csv
 import csv, ast 
 from datetime import datetime
-from crop_details.models import Commodity_Type, Product_Variety
+from crop_details.models import Crops, Commodity_Type, Product_Variety
 
 # Create your views here.
 
 def index(request):
-    latest = Commodity_Type.objects.order_by('-date')
+    latest = Crops.objects.order_by('-date')
     variety = get_variety()
     all_varieties = Product_Variety.objects.all()
-    crops = Commodity_Type.objects.all()
+    crops = Crops.objects.all()
 
     context =  {
         'crops': crops,
@@ -24,8 +25,13 @@ def index(request):
     return render(request, 'csvs/home.html',context)
 
 
+class CropsDetailView(DetailView):
+    model = Crops
+    template_name = "csvs/crop.html"
+
+
 def get_variety():
-    queryset = Commodity_Type.objects.values('product_variety__variety')
+    queryset = Crops.objects.values('product_variety__variety')
     return queryset
 
 
@@ -52,18 +58,23 @@ def upload_file_view(request):
                         volume_in_kgs = row[3]
                         values_in_ksh = row[4]
                         date = datetime.strptime(row[5], '%m/%d/%Y %H:%M')
-                        instance = Commodity_Type.objects.create(
+                        slug = row[6]
+                        instance = Crops.objects.create(
                             # product_variety = product_variety,
                             commodity = commodity,
                             unit = unit,
                             volume_in_kgs = volume_in_kgs,
                             values_in_ksh = values_in_ksh,
-                            date = date
+                            date = date,
+                            slug = slug
                         )
                         instance.save()
                         product_variety = Product_Variety.objects.filter(variety=row[0])
                         for var in product_variety:
                             instance.product_variety.add(var)
+                        # commodity_type = Commodity_Type.objects.filter(commodity_type=row[1])
+                        # for comm in commodity_type:
+                        #     instance.commodity_type.add(comm)
                             
                         print(instance)
                 #         crops, _ = Crops.objects.get_or_create(
@@ -93,7 +104,7 @@ def upload_file_view(request):
 
 def variety_profile(request, id):
     one_variety = get_object_or_404(Product_Variety, id=id)
-    var_queryset = Commodity_Type.objects.all()
+    var_queryset = Crops.objects.all()
     var_query = one_variety.variety
     var_queryset = var_queryset.filter(Q(product_variety__variety__icontains=var_query)).distinct()
     
