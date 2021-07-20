@@ -1,6 +1,4 @@
-Dashboard Interface for data analysis in Django
-
-### This is a weather app that allows users search and view weather conditions of a place. Data is from a Restful API. Check the preview below
+# Dashboard Interface for data analysis in Django
 
 ### This is a website where a data analyst can upload csv files, and the data is categorized and visualized as graphs.
 
@@ -8,7 +6,7 @@ Dashboard Interface for data analysis in Django
 
 - Django
 
-# Website link 
+## Website link 
 https://crops-analysis.herokuapp.com/
 
 Here is a link to a cleaned csv dataset you could use to test csv upload and visualization
